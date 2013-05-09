@@ -140,6 +140,21 @@ class Twitter
 
 
 
+ 	/**
+ 	 * Returns followers of a given user.
+ 	 * @param  string name
+ 	 * @return mixed
+ 	 * @throws TwitterException
+ 	 */
+ 	public function loadUserFollowers($user, $count = 5000, $cursor = -1)
+ 	{
+ 		// 7 days in seconds
+		$cacheExpiry = 604800;
+ 		return $this->cachedRequest('followers/ids', array('screen_name' => $user, 'count' => $count, 'cursor' => $cursor), $cacheExpiry);
+ 	}
+
+
+
 	/**
 	 * Destroys status.
 	 * @param  int    id of status to be destroyed
